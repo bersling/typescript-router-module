@@ -1,6 +1,6 @@
 # Application Specific #
 ######################
-#dist
+dist
 #properties
 deploy.config.json
 
