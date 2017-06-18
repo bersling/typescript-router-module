@@ -1,6 +1,6 @@
 {
   "name": "tsrouter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An expressjs router module written in typescript",
   "main": "dist/index.js",
   "repository": "https://github.com/bersling/typescript-router-module.git",
