@@ -2,7 +2,6 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
-import {log} from '../../logger/logger';
 import * as assert from 'assert';
 import {dao, setupTests} from 'tsmongo';
 
@@ -68,8 +67,8 @@ describe('Simple CRUD Route Test', () => {
           expect(res.body.data.uid).to.exist;
           done();
         }, err => {
-          log.error('Error on POST request:');
-          log.error(err);
+          console.error('Error on POST request:');
+          console.error(err);
           done();
         })
         .catch(function (err) {
@@ -90,12 +89,12 @@ describe('Simple CRUD Route Test', () => {
               expect(res2.body.data.hello).to.equal('planet');
               done();
             }, () => {
-              log.error('Error on GET request');
+              console.error('Error on GET request');
               done();
             });
           }, err => {
-            log.error('Error on PUT request:');
-            log.error(err);
+            console.error('Error on PUT request:');
+            console.error(err);
             done();
           })
           .catch(function (err) {

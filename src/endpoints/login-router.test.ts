@@ -2,7 +2,6 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
-import {log} from '../../logger/logger';
 import * as assert from 'assert';
 import {setupTests} from 'tsmongo';
 import {User, userDAO} from 'tsauth';
@@ -36,7 +35,7 @@ describe('LoginRouter', () => {
             expect(resp.body.data.uid).to.equal(dbResp.data.uid);
             done();
           }, (err) => {
-            log.error(err);
+            console.error(err);
             assert(false);
             done();
           })

@@ -4,7 +4,7 @@ import {loginRouter} from './endpoints/login-router';
 import {simpleCrudRouter} from './endpoints/simple-crud-router';
 import {userRouter} from './endpoints/user-router';
 import * as bodyParser from 'body-parser';
-import {dao} from 'tsmongo';
+import {passportInit} from 'tsauth';
 
 // Creates and configures an ExpressJS web server.
 class Router {
@@ -19,7 +19,7 @@ class Router {
     this.appRouter.use(bodyParser.urlencoded({ extended: false }));
 
     // passport config
-    // passportInit.init(this.appRouter);
+    passportInit.init(this.appRouter);
 
 
     this.routes();

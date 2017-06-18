@@ -2,7 +2,6 @@ import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
-import {log} from '../../logger/logger';
 import * as assert from 'assert';
 import {setupTests} from 'tsmongo';
 import {User, userDAO} from 'tsauth';
@@ -32,7 +31,7 @@ describe('UserRouter', () => {
           expect(resp.body.data.uid).to.exist;
           done();
         }, (err) => {
-          log.error(err);
+          console.error(err);
           assert(false);
           done();
         })
@@ -50,6 +49,7 @@ describe('UserRouter', () => {
     const plaintextPassword = 'Hello World';
 
     userDAO.create(user, plaintextPassword, (dbResp) => {
+      console.log('created hans')
       const responseUser = dbResp.data;
       chai.request(router)
           .post(`/api/v1/login`)
@@ -58,6 +58,7 @@ describe('UserRouter', () => {
             password: plaintextPassword
           })
           .then((resp: any) => {
+        console.log('returned')
             chai.request(router).get('/api/v1/users/' + responseUser.uid)
                 .then(resp2 => {
                   expect(resp2.body.data.email).to.equal('hans');
@@ -69,7 +70,7 @@ describe('UserRouter', () => {
                   throw err;
                 });
           }, (err) => {
-            log.error(err);
+            console.error(err);
             assert(false);
             done();
           })

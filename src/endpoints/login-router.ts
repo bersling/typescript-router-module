@@ -14,8 +14,7 @@ export class LoginRouter {
         session: false,
         failWithError: true
       }),
-      this.loginHandler,
-      this.errorHandler);
+      this.loginHandler);
   }
 
   /**
@@ -33,16 +32,20 @@ export class LoginRouter {
     res.status(200).send({
       message: 'Success',
       status: res.status,
-      data: req.user
+      data: (<any>req).user
     });
 
   }
+/*
 
   errorHandler(err, req, res, next) {
     console.log('handling error');
+    console.log(err.status);
+    console.log(err);
     res.statusMessage = 'Wrong username or password.';
-    res.status(err.status).send();
+    res.status(401).send();
   }
+*/
 
 
 
