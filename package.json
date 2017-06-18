@@ -1,0 +1,13 @@
+{
+  "name": "tsrouter",
+  "version": "1.0.0",
+  "description": "An expressjs router module written in typescript",
+  "main": "index.js",
+  "repository": "https://github.com/bersling/typescript-router-module.git",
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "tsauth": "^0.0.11",
+    "tsmongo": "^0.0.10"
+  }
+}
