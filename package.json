@@ -1,6 +1,6 @@
 {
   "name": "@tsmean/router",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An expressjs router module written in typescript",
   "main": "dist/index.js",
   "repository": "https://github.com/bersling/typescript-router-module.git",
