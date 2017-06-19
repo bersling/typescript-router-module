@@ -3,17 +3,17 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
-import {dao, setupTests} from 'tsmongo';
+import {database} from '../db';
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('Simple CRUD Route Test', () => {
 
-  setupTests.connectTestToDatabase();
+  database().setupTests.connectTestToDatabase();
 
   it('should return the item', (done) => {
-    dao.create({'hello': 'world'}, 'items', (dbResp) => {
+    database().dao.create({'hello': 'world'}, 'items', (dbResp) => {
       chai.request(router).get(`/api/v1/items/${dbResp.data.uid}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -24,8 +24,8 @@ describe('Simple CRUD Route Test', () => {
   });
 
   it('should return all items', (done) => {
-    dao.create({'hello': 'world'}, 'items', (dbResp1) => {
-      dao.create({'goodbye': 'world'}, 'items', (dbResp2) => {
+    database().dao.create({'hello': 'world'}, 'items', (dbResp1) => {
+      database().dao.create({'goodbye': 'world'}, 'items', (dbResp2) => {
         chai.request(router).get(`/api/v1/items`)
             .end((err, res) => {
               expect(res).to.have.status(200);
@@ -38,7 +38,7 @@ describe('Simple CRUD Route Test', () => {
   });
 
   it('should work with promise', (done) => {
-    dao.create({'hello': 'world'}, 'items', (dbResp) => {
+    database().dao.create({'hello': 'world'}, 'items', (dbResp) => {
       chai.request(router).get(`/api/v1/items/${dbResp.data.uid}`)
           .then(res => {
             expect(res).to.have.status(200);
@@ -78,7 +78,7 @@ describe('Simple CRUD Route Test', () => {
 
   it('should be able to update', (done) => {
     const item: any = {'hello': 'world'};
-    dao.create(item, 'items', (dbResp) => {
+    database().dao.create(item, 'items', (dbResp) => {
       dbResp.data.hello = 'planet';
       chai.request(router)
           .put(`/api/v1/items`)
@@ -105,7 +105,7 @@ describe('Simple CRUD Route Test', () => {
 
 
   it('should be able to delete', (done) => {
-    dao.create({'hello': 'world'}, 'items', (dbResp) => {
+    database().dao.create({'hello': 'world'}, 'items', (dbResp) => {
       chai.request(router)
           .del(`/api/v1/items/${dbResp.data.uid}`)
           .then(res => {

@@ -4,7 +4,7 @@ import {loginRouter} from './endpoints/login-router';
 import {simpleCrudRouter} from './endpoints/simple-crud-router';
 import {userRouter} from './endpoints/user-router';
 import * as bodyParser from 'body-parser';
-import {passportInit} from 'tsauth';
+import {passportInit} from '@tsmean/auth';
 
 // Creates and configures an ExpressJS web server.
 class Router {
@@ -40,7 +40,7 @@ class Router {
       next();
     });
 
-    this.appRouter.use('/welcome', welcomeHtmlRouter);
+    this.appRouter.use('/', welcomeHtmlRouter);
 
     // API
     this.appRouter.use('/api/v1/', loginRouter);

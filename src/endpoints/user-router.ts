@@ -1,6 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
-import {userDAO} from 'tsauth';
-import {dao} from 'tsmongo';
+import {userDAO} from '@tsmean/auth';
+import {database} from '../db';
 
 export class UserRouter {
   router: Router;
@@ -46,7 +46,7 @@ export class UserRouter {
   private getHandler(req: Request, res: Response, next: NextFunction) {
     const userId = req.params.id;
 
-    dao.read(userId, 'users', (dbResp) => {
+    database().dao.read(userId, 'users', (dbResp) => {
       if (dbResp.error) {
         res.status(500).send({
           message: 'Server error',

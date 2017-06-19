@@ -3,15 +3,15 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
-import {setupTests} from 'tsmongo';
-import {User, userDAO} from 'tsauth';
+import {database} from '../db';
+import {User, userDAO} from '@tsmean/auth';
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('UserRouter', () => {
 
-  setupTests.connectTestToDatabase();
+  database().setupTests.connectTestToDatabase();
 
   it('should be able to create user', (done) => {
 
@@ -49,7 +49,6 @@ describe('UserRouter', () => {
     const plaintextPassword = 'Hello World';
 
     userDAO.create(user, plaintextPassword, (dbResp) => {
-      console.log('created hans')
       const responseUser = dbResp.data;
       chai.request(router)
           .post(`/api/v1/login`)
@@ -58,7 +57,6 @@ describe('UserRouter', () => {
             password: plaintextPassword
           })
           .then((resp: any) => {
-        console.log('returned')
             chai.request(router).get('/api/v1/users/' + responseUser.uid)
                 .then(resp2 => {
                   expect(resp2.body.data.email).to.equal('hans');

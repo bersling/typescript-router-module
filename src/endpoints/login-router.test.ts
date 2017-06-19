@@ -3,15 +3,15 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
-import {setupTests} from 'tsmongo';
-import {User, userDAO} from 'tsauth';
+import {database} from '../db';
+import {User, userDAO} from '@tsmean/auth';
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('LoginRouter', () => {
 
-  setupTests.connectTestToDatabase();
+  database().setupTests.connectTestToDatabase();
 
   it('should be able to login', (done) => {
 
