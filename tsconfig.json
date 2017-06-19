@@ -3,9 +3,10 @@
     "module": "commonjs",
     "target": "es6",
     "declaration": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "skipLibCheck": true
   },
   "include": [
-    "src/**/*"
+    "./src/**/*"
   ]
 }
