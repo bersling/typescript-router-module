@@ -21,6 +21,10 @@ class Router {
     // passport config
     passportInit.init(this.appRouter);
 
+    // intercept favicon
+    this.appRouter.get('/favicon.ico', function(req, res) {
+      res.status(204);
+    });
 
     this.routes();
   }
